@@ -1,0 +1,56 @@
+<aside class="sidebar">
+  <div class="sidebar-inner">
+
+    <!-- Categories -->
+    <div class="sidebar-section">
+      <h3 class="sidebar-heading">Categories</h3>
+      <ul class="sidebar-list">
+        {% for category in site.categories %}
+          <li>
+            <a href="#" class="sidebar-filter" data-filter-type="category" data-filter="{{ category[0] | slugify }}">
+              {{ category[0] }}
+              <span class="sidebar-count">{{ category[1].size }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Archive -->
+    <div class="sidebar-section">
+      <h3 class="sidebar-heading">Archive</h3>
+      {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+      <ul class="sidebar-archive">
+        {% for year in posts_by_year %}
+          <li>
+            <details {% if forloop.first %}open{% endif %}>
+              <summary>{{ year.name }} <span class="sidebar-count">{{ year.items.size }}</span></summary>
+              {% assign posts_by_month = year.items | group_by_exp: "post", "post.date | date: '%B'" %}
+              <ul class="sidebar-months">
+                {% for month in posts_by_month %}
+                  <li>
+                    <a href="#" class="sidebar-filter" data-filter-type="month" data-filter="{{ year.name }}-{{ month.name | slice: 0, 3 }}">
+                      {{ month.name }}
+                      <span class="sidebar-count">{{ month.items.size }}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </details>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-section">
+      <h3 class="sidebar-heading">Tags</h3>
+      <div class="sidebar-tags">
+        {% for tag in site.tags %}
+          <a href="#" class="sidebar-tag sidebar-filter" data-filter-type="tag" data-filter="{{ tag[0] | slugify }}">{{ tag[0] }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</aside>

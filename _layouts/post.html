@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<article class="post-article">
+  <div class="container layout-with-sidebar">
+    <div class="layout-main">
+      <header class="post-header">
+        <time class="post-date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-header-meta">
+          {% for cat in page.categories %}
+            <span class="meta-badge meta-category">{{ cat }}</span>
+          {% endfor %}
+          {% for tag in page.tags %}
+            <span class="meta-badge meta-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </header>
+      <div class="post-content">
+        {{ content }}
+      </div>
+    </div>
+    {% include sidebar.html %}
+  </div>
+</article>

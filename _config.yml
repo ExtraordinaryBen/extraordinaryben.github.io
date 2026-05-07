@@ -1,0 +1,7 @@
+title: ExtraordinaryBen
+description: Personal development projects and experiments
+url: "https://extraordinaryben.github.io"
+baseurl: ""
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
